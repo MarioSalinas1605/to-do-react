@@ -19,7 +19,7 @@ function App() {
 
       <TodoList>
         {todo.map(todo => (
-          <TodoItem key={todo.id} text={todo.text} />
+          <TodoItem key={todo.id} text={todo.text} completed={todo.completed} />
         ))}
       </TodoList>
 
