@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/CreateTodoButton.css'
+import '../assets/styles/CreateTodoButton.css'
 
 function CreateTodoButton(params) {
     const onClickButton = () => {
