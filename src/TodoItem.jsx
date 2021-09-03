@@ -3,19 +3,11 @@ import './styles/TodoItem.css'
 
 function TodoItem(props) {
 
-    const onCompleted = () => {
-        alert(`You have completed this task: ${props.text}`)
-    }
-
-    const onDeleted = () => {
-        alert(`You have deleted: ${props.text}`)
-    }
-
     return (
         <li className="TodoItem">
             <span
                 className={`Icon Icon-check ${props.completed && 'Icon-check--active'}`}
-                onClick={onCompleted}
+                onClick={props.onCompleted}
             >
                 √
             </span>
@@ -24,7 +16,7 @@ function TodoItem(props) {
             </p>
             <span
                 className="Icon Icon-delete"
-                onClick={onDeleted}
+                onClick={props.onDeleted}
             >
                 X
             </span>

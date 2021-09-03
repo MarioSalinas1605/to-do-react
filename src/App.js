@@ -30,6 +30,18 @@ function App() {
     searchedTodos = todos;
   }
 
+  const handleCompleteTodo = (index, status) => {
+    const newTodos = [...todos]
+    newTodos[index].completed = !status;
+    setTodos(newTodos);
+  }
+
+  const handleDeleteTodo = (index) => {
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  }
+
   return (
     <>
       <TodoCounter
@@ -39,8 +51,14 @@ function App() {
       <TodoSearch searchValue={searchValue} setSearchValue={setSearchValue} />
 
       <TodoList>
-        {searchedTodos.map(todo => (
-          <TodoItem key={todo.id} text={todo.text} completed={todo.completed} />
+        {searchedTodos.map((todo, index) => (
+          <TodoItem
+            key={todo.id}
+            text={todo.text}
+            completed={todo.completed}
+            onCompleted={() => handleCompleteTodo(index, todo.completed)}
+            onDeleted={() => handleDeleteTodo(index)}
+          />
         ))}
       </TodoList>
 
