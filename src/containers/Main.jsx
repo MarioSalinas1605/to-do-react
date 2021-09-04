@@ -4,10 +4,12 @@ import { TodoSearch } from './../components/TodoSearch.jsx'
 import { TodoList } from './../components/TodoList.jsx'
 import { TodoItem } from './../components/TodoItem.jsx';
 import { CreateTodoButton } from './../components/CreateTodoButton.jsx';
+import { Modal } from './Modal.jsx';
 
 function Main({ defaultTodo = [] }) {
     const [todos, setTodos] = useState(defaultTodo)
     const [searchValue, setSearchValue] = useState('');
+    const [openMondal, setOpenModal] = useState(false);
 
     const completedTodos = todos.filter(todo => todo.completed).length;
     const totalTodos = todos.length;
@@ -35,6 +37,10 @@ function Main({ defaultTodo = [] }) {
         setTodos(newTodos);
     }
 
+    const handleCreateTodo = () => {
+        setOpenModal(state => !state);
+    }
+
     return (
         <>
             <TodoCounter
@@ -55,7 +61,15 @@ function Main({ defaultTodo = [] }) {
                 ))}
             </TodoList>
 
-            <CreateTodoButton />
+
+            {
+                openMondal && (
+                    <Modal>
+                        <p>Teletransportación</p>
+                    </Modal>
+                )
+            }
+            <CreateTodoButton onCreateTodo={handleCreateTodo} />
         </>
     )
 }
