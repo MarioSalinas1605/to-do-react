@@ -1,9 +1,11 @@
 import { useState } from 'react';
+import { nanoid } from 'nanoid'
 import { TodoCounter } from './../components/TodoCounter.jsx'
 import { TodoSearch } from './../components/TodoSearch.jsx'
 import { TodoList } from './../components/TodoList.jsx'
 import { TodoItem } from './../components/TodoItem.jsx';
 import { CreateTodoButton } from './../components/CreateTodoButton.jsx';
+import { TodoForm } from '../components/TodoForm.jsx';
 import { Modal } from './Modal.jsx';
 
 function Main({ defaultTodo = [] }) {
@@ -26,7 +28,7 @@ function Main({ defaultTodo = [] }) {
     }
 
     const handleCompleteTodo = (index, status) => {
-        const newTodos = [...todos]
+        const newTodos = [...todos];
         newTodos[index].completed = !status;
         setTodos(newTodos);
     }
@@ -39,6 +41,21 @@ function Main({ defaultTodo = [] }) {
 
     const handleCreateTodo = () => {
         setOpenModal(state => !state);
+    }
+
+    const handleCloseAddTodo = () => {
+        setOpenModal(false);
+    }
+
+    const handleAddTodo = (text) => {
+        const id = nanoid();
+        const newTodos = [...todos];
+        newTodos.push({
+            id,
+            completed: false,
+            text
+        });
+        setTodos(newTodos);
     }
 
     return (
@@ -65,7 +82,10 @@ function Main({ defaultTodo = [] }) {
             {
                 openMondal && (
                     <Modal>
-                        <p>Teletransportación</p>
+                        <TodoForm
+                            onAddTodo={handleAddTodo}
+                            onCancelAddTodo={handleCloseAddTodo}
+                        />
                     </Modal>
                 )
             }
